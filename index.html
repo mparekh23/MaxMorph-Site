@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <canvas id="bg-mesh" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
   <div class="scanline"></div>
   <div class="ambient ambient-a"></div>
   <div class="ambient ambient-b"></div>
@@ -45,26 +47,6 @@
           <a class="button button-primary" href="#platform">Explore MaxMorph <span>→</span></a>
           <a class="button button-ghost" href="#contact">Request a VSP</a>
         </div>
-        <div class="micro-spec"><span>VSP</span><span>·</span><span>DICOM + STL</span><span>·</span><span>GUIDES</span><span>·</span><span>PSI</span></div>
-      </div>
-
-      <div class="hero-visual reveal reveal-delay">
-        <div class="visual-grid"></div>
-        <div class="orbital orbital-1"></div>
-        <div class="orbital orbital-2"></div>
-        <div class="hero-image-wrap">
-          <img src="assets/maxmorph-mark.png" alt="MaxMorph geometric maxillofacial mark" class="hero-mark">
-        </div>
-        <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div><div class="node n4"></div>
-        <div class="signal-card signal-top"><span class="status"></span> SYSTEM / ONLINE</div>
-        <div class="signal-card signal-bottom"><span>01</span> ANATOMY → PLAN → SURGERY</div>
-      </div>
-    </section>
-
-    <section class="ticker" aria-label="MaxMorph capabilities">
-      <div class="ticker-track">
-        <span>VIRTUAL SURGICAL PLANNING</span><i>◆</i><span>CRANIOMAXILLOFACIAL</span><i>◆</i><span>DIGITAL WORKFLOW</span><i>◆</i><span>PATIENT-SPECIFIC SOLUTIONS</span><i>◆</i>
-        <span>VIRTUAL SURGICAL PLANNING</span><i>◆</i><span>CRANIOMAXILLOFACIAL</span><i>◆</i><span>DIGITAL WORKFLOW</span><i>◆</i><span>PATIENT-SPECIFIC SOLUTIONS</span><i>◆</i>
       </div>
     </section>
 
@@ -100,15 +82,15 @@
     </section>
 
     <section class="section workflow" id="workflow">
-      <div class="section-heading split-heading reveal">
-        <div><div class="section-index">02 / WORKFLOW</div><h2>A connected<br><span>digital chain.</span></h2></div>
+      <div class="section-heading reveal">
+        <div class="section-index">02 / WORKFLOW</div><h2>A connected<br><span>digital chain.</span></h2>
         <p>Designed around the way maxillofacial surgeons think: anatomy first, intervention second, verification throughout.</p>
       </div>
       <div class="pipeline reveal">
-        <div class="pipeline-line"><span></span></div>
+        <div class="pipeline-line"></div>
         <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral scan</p></div>
         <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface data</p></div>
-        <div class="pipeline-step active"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
+        <div class="pipeline-step"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
         <div class="pipeline-step"><b>04</b><div class="step-dot"></div><h3>Transfer</h3><p>Splints<br>Guides / PSI</p></div>
         <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital plan<br>→ surgical field</p></div>
       </div>
@@ -123,28 +105,14 @@
         <article class="application-card reveal"><span>TRAUMA</span><h3>Fracture reduction<br>& fixation planning</h3><div class="app-line"></div><p>Virtual reduction, occlusal relationships and transfer planning.</p><b>01 ↗</b></article>
         <article class="application-card reveal reveal-delay"><span>ORTHOGNATHIC</span><h3>Movement planning<br>& surgical simulation</h3><div class="app-line"></div><p>Three-dimensional planning for complex skeletal movements.</p><b>02 ↗</b></article>
         <article class="application-card reveal reveal-delay-2"><span>IMPLANTOLOGY</span><h3>Implant position<br>& restorative geometry</h3><div class="app-line"></div><p>Plan around anatomy, prosthetic intent and available bone.</p><b>03 ↗</b></article>
-        <article class="application-card application-dark reveal"><span>RECONSTRUCTION</span><h3>Patient-specific<br>reconstruction workflows</h3><div class="app-line"></div><p>Digital planning for benign pathology, defects and custom solutions.</p><b>04 ↗</b></article>
+        <article class="application-card reveal"><span>RECONSTRUCTION</span><h3>Patient-specific<br>reconstruction workflows</h3><div class="app-line"></div><p>Digital planning for benign pathology, defects and custom solutions.</p><b>04 ↗</b></article>
       </div>
     </section>
 
-    <section class="section motion">
-      <div class="motion-copy reveal">
-        <div class="section-index">THE SYSTEM</div>
-        <h2>Where anatomy<br>meets <span>geometry.</span></h2>
-        <p>MaxMorph is a focused digital environment for maxillofacial workflows — combining clinical thinking with computational geometry and surgical planning.</p>
-        <div class="metric-row"><div><strong>3D</strong><small>planning-first</small></div><div><strong>∞</strong><small>patient-specific</small></div><div><strong>→</strong><small>plan to surgery</small></div></div>
-      </div>
-      <div class="motion-frame reveal reveal-delay">
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/maxmorph-splash.png">
-          <source src="assets/maxmorph-motion.mp4" type="video/mp4">
-        </video>
-        <div class="frame-overlay"><span>MAXMORPH / MOTION SYSTEM</span><span>2026</span></div>
-      </div>
-    </section>
 
     <section class="section results" id="results">
-      <div class="section-heading split-heading reveal">
-        <div><div class="section-index">04 / RESULTS</div><h2>Measured against<br><span>the operating room.</span></h2></div>
+      <div class="section-heading reveal">
+        <div class="section-index">04 / RESULTS</div><h2>Measured against<br><span>the operating room.</span></h2>
         <p>A plan is only as good as its transfer to surgery. MaxMorph is built so every case can be checked against what actually happened.</p>
       </div>
       <div class="results-grid">
