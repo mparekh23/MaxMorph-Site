@@ -21,6 +21,7 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const TAU = Math.PI * 2, M = 140;
+  const SPEED = .5;             // pace of the whole background animation (1 = full speed)
   const STOPS = [[7, 85, 143], [79, 196, 223], [214, 154, 32], [230, 59, 46]];
   // back layer: many, small, slow. front layer: fewer, larger, faster, more scroll parallax.
   const LAYERS = [
@@ -126,13 +127,14 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   }
 
   function frame(ts) {
-    const t = (ts || 0) / 1000;
-    const dt = still || last < 0 ? 0 : Math.min(.05, Math.max(0, t - last));
-    last = t;
+    const now = (ts || 0) / 1000;
+    const rdt = still || last < 0 ? 0 : Math.min(.05, Math.max(0, now - last));   // real time: scroll + pointer
+    last = now;
+    const t = now * SPEED, dt = rdt * SPEED;                                        // animation clock
 
     if (!still) {     // eased scroll so the depth layers glide instead of snapping
-      const cap = 3000 * dt, d = window.scrollY - sy;
-      sy += Math.max(-cap, Math.min(cap, d * Math.min(1, dt * 5)));
+      const cap = 3000 * rdt, d = window.scrollY - sy;
+      sy += Math.max(-cap, Math.min(cap, d * Math.min(1, rdt * 5)));
       if (gridLines) gridLines.style.translate = '0 ' + (-(sy * .25) % 84).toFixed(2) + 'px';
     }
 
@@ -147,8 +149,8 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       p.dx = p.x - M;
       p.dy = (((p.y - sy * L.par) % H) + H) % H - M;
       const mx = p.dx - mouse.x, my = p.dy - mouse.y, d2 = mx * mx + my * my;
-      if (dt && d2 < 8100) {      // gentle push away from the pointer
-        const d = Math.sqrt(d2) || 1, f = (1 - d / 90) * 70 * dt;
+      if (rdt && d2 < 8100) {     // gentle push away from the pointer
+        const d = Math.sqrt(d2) || 1, f = (1 - d / 90) * 70 * rdt;
         p.x += mx / d * f; p.y += my / d * f; p.dx += mx / d * f; p.dy += my / d * f;
       }
       const hue = p.hue + t * .02 + (p.dx / w) * .45 + (p.dy / h) * .3;
