@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MaxMorph — Virtual Surgical Planning for Craniomaxillofacial Procedures</title>
+<meta name="description" content="MaxMorph is a virtual surgical planning platform for craniomaxillofacial procedures — from scan to surgery, digitally perfected. Site launching soon." />
+<meta name="theme-color" content="#FCFCFA" />
+<meta property="og:title" content="MaxMorph — Virtual Surgical Planning for Craniomaxillofacial Procedures" />
+<meta property="og:description" content="From scan to surgery, digitally perfected. Site launching soon." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#FCFCFA;
+    --ink:#1B2430;
+    --muted:#6B7280;
+    --navy:#04518C;
+    --navy-dim:rgba(4,81,140,0.08);
+    --navy-line:rgba(4,81,140,0.35);
+    --red:#EA3829;
+    --gold:#C9891E;
+    --gold-bright:#E8B23F;
+    --hairline:rgba(27,36,48,0.14);
+    --mesh-line:rgba(4,81,140,0.07);
+    --mesh-line-soft:rgba(4,81,140,0.045);
+    --sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --display:'Archivo Black', 'Arial Black', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 6vw;
+    background-color:var(--bg);
+    background-image:
+      repeating-linear-gradient(0deg, var(--mesh-line) 0 1px, transparent 1px 84px),
+      repeating-linear-gradient(60deg, var(--mesh-line-soft) 0 1px, transparent 1px 84px),
+      repeating-linear-gradient(120deg, var(--mesh-line-soft) 0 1px, transparent 1px 84px);
+    background-position:0 0, 0 0, 0 0;
+    animation:meshDrift 50s linear infinite;
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  @keyframes meshDrift{
+    to{ background-position:84px 84px, 84px 84px, -84px 84px; }
+  }
+
+  /* ---- corner network ornament, echoing the brand mark ---- */
+  .deco{
+    position:fixed;
+    width:clamp(160px, 20vw, 300px);
+    height:auto;
+    pointer-events:none;
+    opacity:0.6;
+    z-index:0;
+  }
+  .deco-tl{ top:-30px; left:-30px; }
+  .deco-tr{ top:-30px; right:-30px; transform:scaleX(-1); }
+  .deco-bl{ bottom:-30px; left:-30px; transform:scaleY(-1); }
+  .deco-br{ bottom:-30px; right:-30px; transform:rotate(180deg); }
+  .deco circle{ fill:none; stroke:var(--gold); stroke-width:1.4; }
+  .deco circle.solid{ fill:var(--gold); stroke:none; }
+  .deco line{ stroke:var(--gold); stroke-width:1; opacity:0.55; }
+  .deco .twinkle{ animation:twinkle 5s ease-in-out infinite; }
+  .deco .twinkle2{ animation:twinkle 6.5s ease-in-out infinite 1.2s; }
+  .deco .cluster{
+    transform-box:fill-box;
+    transform-origin:20% 15%;
+    animation:clusterDrift 13s cubic-bezier(.45,0,.2,1) infinite;
+  }
+  .deco-tr .cluster{ animation-duration:15.5s; animation-delay:-3s; }
+  .deco-bl .cluster{ animation-duration:17s; animation-delay:-7s; }
+  .deco-br .cluster{ animation-duration:14.5s; animation-delay:-10s; }
+  @keyframes clusterDrift{
+    0%,100%{ transform:rotate(0deg) scale(1) translate(0,0); }
+    50%{ transform:rotate(4deg) scale(1.06) translate(4px,-3px); }
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:0.35; }
+    50%{ opacity:1; }
+  }
+
+  .stage{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:640px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:clamp(0.66rem, 0.6rem + 0.25vw, 0.78rem);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--navy);
+    margin:0 0 clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+    max-width:32ch;
+  }
+
+  .logo-wrap{
+    width:clamp(210px, 32vw, 340px);
+    margin:0 0 clamp(0.6rem, 0.3rem + 1vw, 1.1rem);
+  }
+  .logo-wrap img{ width:100%; height:auto; display:block; }
+
+  .wordmark{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(2.1rem, 1.5rem + 4.8vw, 4.25rem);
+    letter-spacing:0.015em;
+    line-height:1;
+    margin:0;
+  }
+  .wordmark .max{ color:var(--navy); }
+  .wordmark .morph{ color:var(--red); }
+
+  .tagline-box{
+    display:inline-block;
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:clamp(0.66rem, 0.6rem + 0.25vw, 0.78rem);
+    letter-spacing:0.13em;
+    text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--hairline);
+    padding:0.65em 1.2em;
+    margin:clamp(1.1rem, 0.9rem + 1vw, 1.6rem) 0 0;
+  }
+
+  .pill{
+    display:inline-block;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--navy);
+    background:var(--navy-dim);
+    border:1px solid var(--navy-line);
+    border-radius:999px;
+    padding:0.5em 1.2em;
+    margin:clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) 0 0;
+  }
+
+  .divider{
+    width:100%;
+    max-width:380px;
+    height:1px;
+    background:var(--hairline);
+    margin:clamp(2.5rem, 2rem + 2vw, 3.5rem) 0 clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  }
+
+  .foot{
+    font-family:var(--sans);
+    font-size:0.82rem;
+    color:var(--muted);
+    margin:0;
+  }
+  .foot a{
+    color:var(--navy);
+    text-decoration:none;
+    border-bottom:1px solid var(--navy-line);
+    transition:color 0.2s ease, border-color 0.2s ease;
+  }
+  .foot a:hover,
+  .foot a:focus-visible{
+    color:var(--red);
+    border-color:var(--red);
+  }
+  .foot a:focus-visible{ outline:2px solid var(--navy-line); outline-offset:3px; border-radius:2px; }
+
+  /* ---- load-in ---- */
+  .reveal{ animation:rise 0.9s cubic-bezier(.16,.8,.24,1) both; }
+  .r1{ animation-delay:.05s; }
+  .r2{ animation-delay:.2s; }
+  .r3{ animation-delay:.35s; }
+  .r4{ animation-delay:.55s; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ animation:none !important; opacity:1 !important; transform:none !important; }
+    .deco .twinkle, .deco .twinkle2{ animation:none !important; opacity:0.6 !important; }
+    .deco .cluster{ animation:none !important; transform:none !important; }
+    body{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <svg class="deco deco-tl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="cluster">
+    <line x1="24" y1="22" x2="92" y2="16"/>
+    <line x1="92" y1="16" x2="152" y2="58"/>
+    <line x1="24" y1="22" x2="42" y2="102"/>
+    <line x1="42" y1="102" x2="112" y2="128"/>
+    <line x1="152" y1="58" x2="202" y2="42"/>
+    <line x1="112" y1="128" x2="14" y2="176"/>
+    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
+    <circle cx="92" cy="16" r="4"/>
+    <circle class="solid" cx="152" cy="58" r="5"/>
+    <circle cx="42" cy="102" r="3.5"/>
+    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
+    <circle cx="202" cy="42" r="5"/>
+    <circle class="solid" cx="14" cy="176" r="3"/>
+    </g>
+  </svg>
+  <svg class="deco deco-br" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="cluster">
+    <line x1="24" y1="22" x2="92" y2="16"/>
+    <line x1="92" y1="16" x2="152" y2="58"/>
+    <line x1="24" y1="22" x2="42" y2="102"/>
+    <line x1="42" y1="102" x2="112" y2="128"/>
+    <line x1="152" y1="58" x2="202" y2="42"/>
+    <line x1="112" y1="128" x2="14" y2="176"/>
+    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
+    <circle cx="92" cy="16" r="4"/>
+    <circle class="solid" cx="152" cy="58" r="5"/>
+    <circle cx="42" cy="102" r="3.5"/>
+    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
+    <circle cx="202" cy="42" r="5"/>
+    <circle class="solid" cx="14" cy="176" r="3"/>
+    </g>
+  </svg>
+  <svg class="deco deco-tr" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="cluster">
+    <line x1="24" y1="22" x2="92" y2="16"/>
+    <line x1="92" y1="16" x2="152" y2="58"/>
+    <line x1="24" y1="22" x2="42" y2="102"/>
+    <line x1="42" y1="102" x2="112" y2="128"/>
+    <line x1="152" y1="58" x2="202" y2="42"/>
+    <line x1="112" y1="128" x2="14" y2="176"/>
+    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
+    <circle cx="92" cy="16" r="4"/>
+    <circle class="solid" cx="152" cy="58" r="5"/>
+    <circle cx="42" cy="102" r="3.5"/>
+    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
+    <circle cx="202" cy="42" r="5"/>
+    <circle class="solid" cx="14" cy="176" r="3"/>
+    </g>
+  </svg>
+  <svg class="deco deco-bl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="cluster">
+    <line x1="24" y1="22" x2="92" y2="16"/>
+    <line x1="92" y1="16" x2="152" y2="58"/>
+    <line x1="24" y1="22" x2="42" y2="102"/>
+    <line x1="42" y1="102" x2="112" y2="128"/>
+    <line x1="152" y1="58" x2="202" y2="42"/>
+    <line x1="112" y1="128" x2="14" y2="176"/>
+    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
+    <circle cx="92" cy="16" r="4"/>
+    <circle class="solid" cx="152" cy="58" r="5"/>
+    <circle cx="42" cy="102" r="3.5"/>
+    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
+    <circle cx="202" cy="42" r="5"/>
+    <circle class="solid" cx="14" cy="176" r="3"/>
+    </g>
+  </svg>
+
+  <main class="stage">
+
+    <p class="eyebrow reveal r1">Virtual Surgical Planning for Craniomaxillofacial Procedures</p>
+
+    <div class="logo-wrap reveal r2">
+      <img src="logo-mark.png" width="740" height="590" alt="MaxMorph logo mark: a stylized skull, half rendered in clinical blue, half as a gold digital network." />
+    </div>
+
+    <div class="reveal r3">
+      <h1 class="wordmark"><span class="max">MAX</span><span class="morph">MORPH</span></h1>
+      <p class="tagline-box">From Scan to Surgery, Digitally Perfected</p>
+      <p class="pill">Full site launching soon</p>
+    </div>
+
+    <div class="divider reveal r4" role="presentation"></div>
+
+    <p class="foot reveal r4">Inquiries — <a href="mailto:admin@max-morph.com">admin@max-morph.com</a></p>
+
+  </main>
+
+</body>
+</html>

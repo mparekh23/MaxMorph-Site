@@ -1,300 +1,195 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MaxMorph — Virtual Surgical Planning for Craniomaxillofacial Procedures</title>
-<meta name="description" content="MaxMorph is a virtual surgical planning platform for craniomaxillofacial procedures — from scan to surgery, digitally perfected. Site launching soon." />
-<meta name="theme-color" content="#FCFCFA" />
-<meta property="og:title" content="MaxMorph — Virtual Surgical Planning for Craniomaxillofacial Procedures" />
-<meta property="og:description" content="From scan to surgery, digitally perfected. Site launching soon." />
-<meta property="og:type" content="website" />
-<link rel="icon" type="image/png" href="favicon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --bg:#FCFCFA;
-    --ink:#1B2430;
-    --muted:#6B7280;
-    --navy:#04518C;
-    --navy-dim:rgba(4,81,140,0.08);
-    --navy-line:rgba(4,81,140,0.35);
-    --red:#EA3829;
-    --gold:#C9891E;
-    --gold-bright:#E8B23F;
-    --hairline:rgba(27,36,48,0.14);
-    --mesh-line:rgba(4,81,140,0.07);
-    --mesh-line-soft:rgba(4,81,140,0.045);
-    --sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --display:'Archivo Black', 'Arial Black', sans-serif;
-  }
-
-  *{ box-sizing:border-box; }
-  html,body{ height:100%; }
-  body{
-    margin:0;
-    min-height:100svh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:6vh 6vw;
-    background-color:var(--bg);
-    background-image:
-      repeating-linear-gradient(0deg, var(--mesh-line) 0 1px, transparent 1px 84px),
-      repeating-linear-gradient(60deg, var(--mesh-line-soft) 0 1px, transparent 1px 84px),
-      repeating-linear-gradient(120deg, var(--mesh-line-soft) 0 1px, transparent 1px 84px);
-    background-position:0 0, 0 0, 0 0;
-    animation:meshDrift 50s linear infinite;
-    color:var(--ink);
-    font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;
-    position:relative;
-    overflow-x:hidden;
-  }
-  @keyframes meshDrift{
-    to{ background-position:84px 84px, 84px 84px, -84px 84px; }
-  }
-
-  /* ---- corner network ornament, echoing the brand mark ---- */
-  .deco{
-    position:fixed;
-    width:clamp(160px, 20vw, 300px);
-    height:auto;
-    pointer-events:none;
-    opacity:0.6;
-    z-index:0;
-  }
-  .deco-tl{ top:-30px; left:-30px; }
-  .deco-tr{ top:-30px; right:-30px; transform:scaleX(-1); }
-  .deco-bl{ bottom:-30px; left:-30px; transform:scaleY(-1); }
-  .deco-br{ bottom:-30px; right:-30px; transform:rotate(180deg); }
-  .deco circle{ fill:none; stroke:var(--gold); stroke-width:1.4; }
-  .deco circle.solid{ fill:var(--gold); stroke:none; }
-  .deco line{ stroke:var(--gold); stroke-width:1; opacity:0.55; }
-  .deco .twinkle{ animation:twinkle 5s ease-in-out infinite; }
-  .deco .twinkle2{ animation:twinkle 6.5s ease-in-out infinite 1.2s; }
-  .deco .cluster{
-    transform-box:fill-box;
-    transform-origin:20% 15%;
-    animation:clusterDrift 13s cubic-bezier(.45,0,.2,1) infinite;
-  }
-  .deco-tr .cluster{ animation-duration:15.5s; animation-delay:-3s; }
-  .deco-bl .cluster{ animation-duration:17s; animation-delay:-7s; }
-  .deco-br .cluster{ animation-duration:14.5s; animation-delay:-10s; }
-  @keyframes clusterDrift{
-    0%,100%{ transform:rotate(0deg) scale(1) translate(0,0); }
-    50%{ transform:rotate(4deg) scale(1.06) translate(4px,-3px); }
-  }
-  @keyframes twinkle{
-    0%,100%{ opacity:0.35; }
-    50%{ opacity:1; }
-  }
-
-  .stage{
-    position:relative;
-    z-index:1;
-    width:100%;
-    max-width:640px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-
-  .eyebrow{
-    font-family:var(--sans);
-    font-weight:600;
-    font-size:clamp(0.66rem, 0.6rem + 0.25vw, 0.78rem);
-    letter-spacing:0.15em;
-    text-transform:uppercase;
-    color:var(--navy);
-    margin:0 0 clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
-    max-width:32ch;
-  }
-
-  .logo-wrap{
-    width:clamp(210px, 32vw, 340px);
-    margin:0 0 clamp(0.6rem, 0.3rem + 1vw, 1.1rem);
-  }
-  .logo-wrap img{ width:100%; height:auto; display:block; }
-
-  .wordmark{
-    font-family:var(--display);
-    font-weight:400;
-    font-size:clamp(2.1rem, 1.5rem + 4.8vw, 4.25rem);
-    letter-spacing:0.015em;
-    line-height:1;
-    margin:0;
-  }
-  .wordmark .max{ color:var(--navy); }
-  .wordmark .morph{ color:var(--red); }
-
-  .tagline-box{
-    display:inline-block;
-    font-family:var(--sans);
-    font-weight:500;
-    font-size:clamp(0.66rem, 0.6rem + 0.25vw, 0.78rem);
-    letter-spacing:0.13em;
-    text-transform:uppercase;
-    color:var(--muted);
-    border:1px solid var(--hairline);
-    padding:0.65em 1.2em;
-    margin:clamp(1.1rem, 0.9rem + 1vw, 1.6rem) 0 0;
-  }
-
-  .pill{
-    display:inline-block;
-    font-family:var(--sans);
-    font-weight:600;
-    font-size:0.72rem;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    color:var(--navy);
-    background:var(--navy-dim);
-    border:1px solid var(--navy-line);
-    border-radius:999px;
-    padding:0.5em 1.2em;
-    margin:clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem) 0 0;
-  }
-
-  .divider{
-    width:100%;
-    max-width:380px;
-    height:1px;
-    background:var(--hairline);
-    margin:clamp(2.5rem, 2rem + 2vw, 3.5rem) 0 clamp(1.25rem, 1rem + 1vw, 1.75rem);
-  }
-
-  .foot{
-    font-family:var(--sans);
-    font-size:0.82rem;
-    color:var(--muted);
-    margin:0;
-  }
-  .foot a{
-    color:var(--navy);
-    text-decoration:none;
-    border-bottom:1px solid var(--navy-line);
-    transition:color 0.2s ease, border-color 0.2s ease;
-  }
-  .foot a:hover,
-  .foot a:focus-visible{
-    color:var(--red);
-    border-color:var(--red);
-  }
-  .foot a:focus-visible{ outline:2px solid var(--navy-line); outline-offset:3px; border-radius:2px; }
-
-  /* ---- load-in ---- */
-  .reveal{ animation:rise 0.9s cubic-bezier(.16,.8,.24,1) both; }
-  .r1{ animation-delay:.05s; }
-  .r2{ animation-delay:.2s; }
-  .r3{ animation-delay:.35s; }
-  .r4{ animation-delay:.55s; }
-  @keyframes rise{
-    from{ opacity:0; transform:translateY(10px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ animation:none !important; opacity:1 !important; transform:none !important; }
-    .deco .twinkle, .deco .twinkle2{ animation:none !important; opacity:0.6 !important; }
-    .deco .cluster{ animation:none !important; transform:none !important; }
-    body{ animation:none !important; }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MaxMorph — Digital Maxillofacial Surgery</title>
+  <meta name="description" content="MaxMorph — digital workflows for virtual surgical planning, surgical guides and patient-specific solutions in maxillofacial surgery." />
+  <meta name="theme-color" content="#f8fafc" />
+  <meta property="og:title" content="MaxMorph — From Scan to Surgery, Digitally Perfected" />
+  <meta property="og:description" content="A digital planning platform for maxillofacial surgery." />
+  <meta property="og:image" content="https://max-morph.com/assets/maxmorph-splash.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="scanline"></div>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
 
-  <svg class="deco deco-tl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g class="cluster">
-    <line x1="24" y1="22" x2="92" y2="16"/>
-    <line x1="92" y1="16" x2="152" y2="58"/>
-    <line x1="24" y1="22" x2="42" y2="102"/>
-    <line x1="42" y1="102" x2="112" y2="128"/>
-    <line x1="152" y1="58" x2="202" y2="42"/>
-    <line x1="112" y1="128" x2="14" y2="176"/>
-    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
-    <circle cx="92" cy="16" r="4"/>
-    <circle class="solid" cx="152" cy="58" r="5"/>
-    <circle cx="42" cy="102" r="3.5"/>
-    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
-    <circle cx="202" cy="42" r="5"/>
-    <circle class="solid" cx="14" cy="176" r="3"/>
-    </g>
-  </svg>
-  <svg class="deco deco-br" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g class="cluster">
-    <line x1="24" y1="22" x2="92" y2="16"/>
-    <line x1="92" y1="16" x2="152" y2="58"/>
-    <line x1="24" y1="22" x2="42" y2="102"/>
-    <line x1="42" y1="102" x2="112" y2="128"/>
-    <line x1="152" y1="58" x2="202" y2="42"/>
-    <line x1="112" y1="128" x2="14" y2="176"/>
-    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
-    <circle cx="92" cy="16" r="4"/>
-    <circle class="solid" cx="152" cy="58" r="5"/>
-    <circle cx="42" cy="102" r="3.5"/>
-    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
-    <circle cx="202" cy="42" r="5"/>
-    <circle class="solid" cx="14" cy="176" r="3"/>
-    </g>
-  </svg>
-  <svg class="deco deco-tr" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g class="cluster">
-    <line x1="24" y1="22" x2="92" y2="16"/>
-    <line x1="92" y1="16" x2="152" y2="58"/>
-    <line x1="24" y1="22" x2="42" y2="102"/>
-    <line x1="42" y1="102" x2="112" y2="128"/>
-    <line x1="152" y1="58" x2="202" y2="42"/>
-    <line x1="112" y1="128" x2="14" y2="176"/>
-    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
-    <circle cx="92" cy="16" r="4"/>
-    <circle class="solid" cx="152" cy="58" r="5"/>
-    <circle cx="42" cy="102" r="3.5"/>
-    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
-    <circle cx="202" cy="42" r="5"/>
-    <circle class="solid" cx="14" cy="176" r="3"/>
-    </g>
-  </svg>
-  <svg class="deco deco-bl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g class="cluster">
-    <line x1="24" y1="22" x2="92" y2="16"/>
-    <line x1="92" y1="16" x2="152" y2="58"/>
-    <line x1="24" y1="22" x2="42" y2="102"/>
-    <line x1="42" y1="102" x2="112" y2="128"/>
-    <line x1="152" y1="58" x2="202" y2="42"/>
-    <line x1="112" y1="128" x2="14" y2="176"/>
-    <circle class="solid twinkle" cx="24" cy="22" r="6"/>
-    <circle cx="92" cy="16" r="4"/>
-    <circle class="solid" cx="152" cy="58" r="5"/>
-    <circle cx="42" cy="102" r="3.5"/>
-    <circle class="solid twinkle2" cx="112" cy="128" r="4.5"/>
-    <circle cx="202" cy="42" r="5"/>
-    <circle class="solid" cx="14" cy="176" r="3"/>
-    </g>
-  </svg>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="MaxMorph home">
+      <span class="brand-dot"></span>
+      <span class="brand-max">MAX</span><span class="brand-morph">MORPH</span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#platform">Platform</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#applications">Applications</a>
+      <a href="#results">Results</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Contact us <span>↗</span></a>
+  </header>
 
-  <main class="stage">
+  <main>
+    <section class="hero section-grid" id="home">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span> DIGITAL MAXILLOFACIAL SURGERY</div>
+        <h1>From scan<br>to <em>surgery.</em></h1>
+        <p class="hero-lede">A digital planning environment built around the anatomy, geometry and precision of maxillofacial surgery.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#platform">Explore MaxMorph <span>→</span></a>
+          <a class="button button-ghost" href="#contact">Request a VSP</a>
+        </div>
+        <div class="micro-spec"><span>VSP</span><span>·</span><span>DICOM + STL</span><span>·</span><span>GUIDES</span><span>·</span><span>PSI</span></div>
+      </div>
 
-    <p class="eyebrow reveal r1">Virtual Surgical Planning for Craniomaxillofacial Procedures</p>
+      <div class="hero-visual reveal reveal-delay">
+        <div class="visual-grid"></div>
+        <div class="orbital orbital-1"></div>
+        <div class="orbital orbital-2"></div>
+        <div class="hero-image-wrap">
+          <img src="assets/maxmorph-mark.png" alt="MaxMorph geometric maxillofacial mark" class="hero-mark">
+        </div>
+        <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div><div class="node n4"></div>
+        <div class="signal-card signal-top"><span class="status"></span> SYSTEM / ONLINE</div>
+        <div class="signal-card signal-bottom"><span>01</span> ANATOMY → PLAN → SURGERY</div>
+      </div>
+    </section>
 
-    <div class="logo-wrap reveal r2">
-      <img src="logo-mark.png" width="740" height="590" alt="MaxMorph logo mark: a stylized skull, half rendered in clinical blue, half as a gold digital network." />
-    </div>
+    <section class="ticker" aria-label="MaxMorph capabilities">
+      <div class="ticker-track">
+        <span>VIRTUAL SURGICAL PLANNING</span><i>◆</i><span>CRANIOMAXILLOFACIAL</span><i>◆</i><span>DIGITAL WORKFLOW</span><i>◆</i><span>PATIENT-SPECIFIC SOLUTIONS</span><i>◆</i>
+        <span>VIRTUAL SURGICAL PLANNING</span><i>◆</i><span>CRANIOMAXILLOFACIAL</span><i>◆</i><span>DIGITAL WORKFLOW</span><i>◆</i><span>PATIENT-SPECIFIC SOLUTIONS</span><i>◆</i>
+      </div>
+    </section>
 
-    <div class="reveal r3">
-      <h1 class="wordmark"><span class="max">MAX</span><span class="morph">MORPH</span></h1>
-      <p class="tagline-box">From Scan to Surgery, Digitally Perfected</p>
-      <p class="pill">Full site launching soon</p>
-    </div>
+    <section class="section platform" id="platform">
+      <div class="section-heading reveal">
+        <div class="section-index">01 / PLATFORM</div>
+        <h2>Precision starts<br><span>before the incision.</span></h2>
+        <p>MaxMorph brings imaging, surface data and surgical intent into one digital planning pipeline.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card feature-large reveal">
+          <div class="card-number">01</div>
+          <div class="card-icon mesh-icon"></div>
+          <h3>Scan → Anatomy</h3>
+          <p>Work with DICOM imaging and surface models to establish a patient-specific anatomical foundation.</p>
+          <div class="card-code">DICOM / STL / MESH</div>
+        </article>
+        <article class="feature-card reveal reveal-delay">
+          <div class="card-number">02</div>
+          <div class="card-icon cross-icon">+</div>
+          <h3>Plan the movement</h3>
+          <p>Visualise osteotomies, repositioning and surgical relationships in three dimensions.</p>
+          <div class="card-code">3D / VSP</div>
+        </article>
+        <article class="feature-card reveal reveal-delay-2">
+          <div class="card-number">03</div>
+          <div class="card-icon guide-icon"></div>
+          <h3>Design the transfer</h3>
+          <p>Turn a validated virtual plan into clinically useful splints, guides and patient-specific workflows.</p>
+          <div class="card-code">GUIDE / SPLINT / PSI</div>
+        </article>
+      </div>
+    </section>
 
-    <div class="divider reveal r4" role="presentation"></div>
+    <section class="section workflow" id="workflow">
+      <div class="section-heading split-heading reveal">
+        <div><div class="section-index">02 / WORKFLOW</div><h2>A connected<br><span>digital chain.</span></h2></div>
+        <p>Designed around the way maxillofacial surgeons think: anatomy first, intervention second, verification throughout.</p>
+      </div>
+      <div class="pipeline reveal">
+        <div class="pipeline-line"><span></span></div>
+        <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral scan</p></div>
+        <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface data</p></div>
+        <div class="pipeline-step active"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
+        <div class="pipeline-step"><b>04</b><div class="step-dot"></div><h3>Transfer</h3><p>Splints<br>Guides / PSI</p></div>
+        <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital plan<br>→ surgical field</p></div>
+      </div>
+    </section>
 
-    <p class="foot reveal r4">Inquiries — <a href="mailto:admin@max-morph.com">admin@max-morph.com</a></p>
+    <section class="section applications" id="applications">
+      <div class="section-heading reveal">
+        <div class="section-index">03 / APPLICATIONS</div>
+        <h2>Built for the<br><span>maxillofacial domain.</span></h2>
+      </div>
+      <div class="application-grid">
+        <article class="application-card reveal"><span>TRAUMA</span><h3>Fracture reduction<br>& fixation planning</h3><div class="app-line"></div><p>Virtual reduction, occlusal relationships and transfer planning.</p><b>01 ↗</b></article>
+        <article class="application-card reveal reveal-delay"><span>ORTHOGNATHIC</span><h3>Movement planning<br>& surgical simulation</h3><div class="app-line"></div><p>Three-dimensional planning for complex skeletal movements.</p><b>02 ↗</b></article>
+        <article class="application-card reveal reveal-delay-2"><span>IMPLANTOLOGY</span><h3>Implant position<br>& restorative geometry</h3><div class="app-line"></div><p>Plan around anatomy, prosthetic intent and available bone.</p><b>03 ↗</b></article>
+        <article class="application-card application-dark reveal"><span>RECONSTRUCTION</span><h3>Patient-specific<br>reconstruction workflows</h3><div class="app-line"></div><p>Digital planning for benign pathology, defects and custom solutions.</p><b>04 ↗</b></article>
+      </div>
+    </section>
 
+    <section class="section motion">
+      <div class="motion-copy reveal">
+        <div class="section-index">THE SYSTEM</div>
+        <h2>Where anatomy<br>meets <span>geometry.</span></h2>
+        <p>MaxMorph is a focused digital environment for maxillofacial workflows — combining clinical thinking with computational geometry and surgical planning.</p>
+        <div class="metric-row"><div><strong>3D</strong><small>planning-first</small></div><div><strong>∞</strong><small>patient-specific</small></div><div><strong>→</strong><small>plan to surgery</small></div></div>
+      </div>
+      <div class="motion-frame reveal reveal-delay">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/maxmorph-splash.png">
+          <source src="assets/maxmorph-motion.mp4" type="video/mp4">
+        </video>
+        <div class="frame-overlay"><span>MAXMORPH / MOTION SYSTEM</span><span>2026</span></div>
+      </div>
+    </section>
+
+    <section class="section results" id="results">
+      <div class="section-heading split-heading reveal">
+        <div><div class="section-index">04 / RESULTS</div><h2>Measured against<br><span>the operating room.</span></h2></div>
+        <p>A plan is only as good as its transfer to surgery. MaxMorph is built so every case can be checked against what actually happened.</p>
+      </div>
+      <div class="results-grid">
+        <article class="result-card reveal"><span>ACCURACY</span><h3>Planned vs achieved</h3><p>Compare the virtual plan with post-operative imaging to quantify translation and rotation of each segment.</p><b>MEASURE 01</b></article>
+        <article class="result-card reveal reveal-delay"><span>FIT</span><h3>Guide &amp; splint fit</h3><p>Verify that surgical guides and splints seat as designed, and record any adjustment needed at the table.</p><b>MEASURE 02</b></article>
+        <article class="result-card reveal reveal-delay-2"><span>EFFICIENCY</span><h3>Planning turnaround</h3><p>Track time from scan received to plan approved and guides delivered, case by case.</p><b>MEASURE 03</b></article>
+        <article class="result-card reveal"><span>OCCLUSION</span><h3>Occlusal outcome</h3><p>Assess post-operative occlusal relationships against the planned target.</p><b>MEASURE 04</b></article>
+      </div>
+      <p class="results-note reveal">Case results and validation data will be published here as they are finalised. For study collaborations, <a href="#contact">get in touch</a>.</p>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="contact-panel reveal">
+        <div class="contact-copy">
+          <div class="section-index">05 / CONTACT US</div>
+          <h2>Let's build the<br><span>next surgical workflow.</span></h2>
+          <p>For VSP enquiries, clinical collaborations or product discussions.</p>
+          <a class="contact-mail" href="mailto:admin@max-morph.com">admin@max-morph.com <span>↗</span></a>
+        </div>
+        <form class="contact-form" id="contact-form" action="mailto:admin@max-morph.com" method="post" enctype="text/plain">
+          <label>Name<input type="text" name="name" required autocomplete="name"></label>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
+          <label>Enquiry type
+            <select name="type">
+              <option>VSP case enquiry</option>
+              <option>Clinical collaboration</option>
+              <option>Product discussion</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="4" required></textarea></label>
+          <button class="button button-primary" type="submit">Send message <span>→</span></button>
+          <small>This opens your email app with the message ready to send. Please do not include patient-identifiable information.</small>
+        </form>
+      </div>
+    </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="footer-brand"><span class="brand-max">MAX</span><span class="brand-morph">MORPH</span><small>FROM SCAN TO SURGERY, DIGITALLY PERFECTED.</small></div>
+    <div class="footer-links"><a href="#platform">Platform</a><a href="#workflow">Workflow</a><a href="#applications">Applications</a><a href="#results">Results</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
+    <div class="footer-bottom"><span>© 2026 MaxMorph. All rights reserved.</span><span>Digital planning for maxillofacial surgery.</span></div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
