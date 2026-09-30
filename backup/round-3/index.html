@@ -16,16 +16,15 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="top"></div>
   <canvas id="bg-mesh" aria-hidden="true"></canvas>
-  <div class="bg-grid" aria-hidden="true"><div></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
   <div class="scanline"></div>
   <div class="ambient ambient-a" aria-hidden="true"></div>
   <div class="ambient ambient-b" aria-hidden="true"></div>
   <div class="ambient ambient-c" aria-hidden="true"></div>
   <div class="ambient ambient-d" aria-hidden="true"></div>
 
-  <header class="site-header">
+  <header class="site-header" id="top">
     <a class="brand" href="#top" aria-label="MaxMorph home">
       <span class="brand-dot"></span>
       <span class="brand-max">MAX</span><span class="brand-morph">MORPH</span>
@@ -35,6 +34,7 @@
       <a href="#workflow">Workflow</a>
       <a href="#applications">Applications</a>
       <a href="#results">Results</a>
+      <a href="#contact">Contact</a>
     </nav>
     <a class="nav-cta" href="#contact">Contact us <span>↗</span></a>
   </header>
@@ -88,15 +88,13 @@
         <div class="section-index">02 / WORKFLOW</div><h2>A connected<br><span>digital chain.</span></h2>
         <p>Designed around the way maxillofacial surgeons think: anatomy first, intervention second, verification throughout.</p>
       </div>
-      <div class="pipeline-box reveal">
-        <div class="pipeline">
-          <div class="pipeline-line"></div>
-          <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral scan</p></div>
-          <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface data</p></div>
-          <div class="pipeline-step"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
-          <div class="pipeline-step"><b>04</b><div class="step-dot"></div><h3>Transfer</h3><p>Splints<br>Guides / PSI</p></div>
-          <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital plan<br>→ surgical field</p></div>
-        </div>
+      <div class="pipeline reveal">
+        <div class="pipeline-line"></div>
+        <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral scan</p></div>
+        <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface data</p></div>
+        <div class="pipeline-step"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
+        <div class="pipeline-step"><b>04</b><div class="step-dot"></div><h3>Transfer</h3><p>Splints<br>Guides / PSI</p></div>
+        <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital plan<br>→ surgical field</p></div>
       </div>
     </section>
 
@@ -159,11 +157,8 @@
 
   <footer class="site-footer">
     <div class="footer-brand"><span class="brand-max">MAX</span><span class="brand-morph">MORPH</span><small>FROM SCAN TO SURGERY, DIGITALLY PERFECTED.</small></div>
-    <div class="footer-links"><a href="#top">Back to top ↑</a></div>
-    <div class="footer-bottom">
-      <p>© 2026 Dr. Meet Parekh. All Rights Reserved. Developed and owned by Dr. Meet Parekh.</p>
-      <p>MAXMORPH™ is a proprietary software platform of MaxMorph LLP. Unauthorized copying, reproduction, modification, distribution, reverse engineering, or commercial use is prohibited without prior written permission.</p>
-    </div>
+    <div class="footer-links"><a href="#platform">Platform</a><a href="#workflow">Workflow</a><a href="#applications">Applications</a><a href="#results">Results</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
+    <div class="footer-bottom"><span>© 2026 MaxMorph. All rights reserved.</span><span>Digital planning for maxillofacial surgery.</span></div>
   </footer>
 
   <script src="script.js"></script>
