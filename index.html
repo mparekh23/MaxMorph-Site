@@ -16,15 +16,16 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="top"></div>
   <canvas id="bg-mesh" aria-hidden="true"></canvas>
-  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"><div></div></div>
   <div class="scanline"></div>
   <div class="ambient ambient-a" aria-hidden="true"></div>
   <div class="ambient ambient-b" aria-hidden="true"></div>
   <div class="ambient ambient-c" aria-hidden="true"></div>
   <div class="ambient ambient-d" aria-hidden="true"></div>
 
-  <header class="site-header" id="top">
+  <header class="site-header">
     <a class="brand" href="#top" aria-label="MaxMorph home">
       <span class="brand-dot"></span>
       <span class="brand-max">MAX</span><span class="brand-morph">MORPH</span>
@@ -34,7 +35,6 @@
       <a href="#workflow">Workflow</a>
       <a href="#applications">Applications</a>
       <a href="#results">Results</a>
-      <a href="#contact">Contact</a>
     </nav>
     <a class="nav-cta" href="#contact">Contact us <span>↗</span></a>
   </header>
@@ -157,8 +157,11 @@
 
   <footer class="site-footer">
     <div class="footer-brand"><span class="brand-max">MAX</span><span class="brand-morph">MORPH</span><small>FROM SCAN TO SURGERY, DIGITALLY PERFECTED.</small></div>
-    <div class="footer-links"><a href="#platform">Platform</a><a href="#workflow">Workflow</a><a href="#applications">Applications</a><a href="#results">Results</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
-    <div class="footer-bottom"><span>© 2026 MaxMorph. All rights reserved.</span><span>Digital planning for maxillofacial surgery.</span></div>
+    <div class="footer-links"><a href="#top">Back to top ↑</a></div>
+    <div class="footer-bottom">
+      <p>© 2026 Dr. Meet Parekh. All Rights Reserved. Developed and owned by Dr. Meet Parekh.</p>
+      <p>MAXMORPH™ is a proprietary software platform of MaxMorph LLP. Unauthorized copying, reproduction, modification, distribution, reverse engineering, or commercial use is prohibited without prior written permission.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>

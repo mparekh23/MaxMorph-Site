@@ -67,7 +67,8 @@ html{scroll-padding-top:90px}
 .contact-copy h2 span{color:var(--red)}
 .contact-mail{font:600 clamp(17px,2vw,21px) var(--sans);letter-spacing:0;color:var(--blue)}
 #bg-mesh{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-.bg-grid{position:fixed;inset:-84px;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(7,85,143,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,85,143,.055) 1px,transparent 1px);background-size:84px 84px;-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 25%,transparent 85%);mask-image:radial-gradient(ellipse at 50% 40%,#000 25%,transparent 85%);animation:bgGrid 40s linear infinite}
+.bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;-webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 35%,rgba(0,0,0,.4) 100%);mask-image:radial-gradient(ellipse at 50% 45%,#000 35%,rgba(0,0,0,.4) 100%)}
+.bg-grid div{position:absolute;inset:-96px;background-image:linear-gradient(rgba(7,85,143,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,85,143,.055) 1px,transparent 1px);background-size:84px 84px;animation:bgGrid 40s linear infinite}
 @keyframes bgGrid{to{transform:translate(84px,84px)}}
 
 /* ---- round 3: flowing colour washes behind the particle mesh ---- */
@@ -82,3 +83,7 @@ html{scroll-padding-top:90px}
 @keyframes washD{to{transform:translate(-36vw,-34vh) scale(1.1)}}
 @keyframes washFade{from{opacity:.14}to{opacity:.4}}
 @media(max-width:520px){.eyebrow,.section-index{font-size:12px;letter-spacing:.16em}}
+
+/* ---- round 4: footer notice ---- */
+.footer-bottom{display:block;font:12px/1.75 var(--sans);letter-spacing:0;color:#66727f}
+.footer-bottom p{margin:0 0 6px;max-width:980px}
