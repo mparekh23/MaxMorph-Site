@@ -60,7 +60,7 @@ html{scroll-padding-top:90px}
 .pipeline-step b{color:var(--gold);font-size:11px;font-weight:700}
 .card-code{font-size:9px;font-weight:700}
 .pipeline-step p{font-weight:600}
-.hero{grid-template-columns:1fr;min-height:calc(100vh - 78px);align-content:center;padding:clamp(70px,10vw,140px) 0}
+.hero{--bleed:max(0px,calc((100vw - min(1220px,90vw)) / 2 - 2vw));grid-template-columns:minmax(0,max-content) minmax(0,1fr);column-gap:clamp(24px,3vw,48px);min-height:calc(100vh - 78px);align-items:center;align-content:center;padding:clamp(70px,10vw,140px) 0}
 .hero-copy{max-width:900px}
 .hero h1{font-size:clamp(76px,11vw,170px)}
 .hero-lede{max-width:640px}
@@ -94,3 +94,28 @@ html{scroll-padding-top:90px}
 .pipeline-box .pipeline{padding:70px 0 52px}
 .pipeline-box .step-dot{background:#fff}
 @media(max-width:900px){.pipeline-box{padding:0 22px}.pipeline-box .pipeline{padding:30px 0 22px}}
+
+/* ---- round 6: animated logo in the hero (the logo itself never moves or rotates; only light plays over it) ---- */
+@media(min-width:901px){.hero-lede{max-width:min(640px,46vw)}}
+.hero-logo{position:relative;justify-self:end;width:min(calc(100% + var(--bleed)),620px,max(300px,calc((100vh - 170px) * .955)));margin-right:calc(-1 * var(--bleed));aspect-ratio:506/530;pointer-events:none;user-select:none;-webkit-user-select:none;isolation:isolate;animation:logoIn 1.4s .15s ease both}
+@keyframes logoIn{from{opacity:0}to{opacity:1}}
+.logo-halo{position:absolute;inset:-14%;z-index:-1;background:radial-gradient(ellipse 34% 40% at 34% 46%,rgba(214,154,32,.26),transparent 70%),radial-gradient(ellipse 40% 44% at 64% 50%,rgba(79,196,223,.28),transparent 72%);animation:logoHalo 7s ease-in-out infinite alternate}
+@keyframes logoHalo{from{opacity:.55;transform:scale(.97)}to{opacity:1;transform:scale(1.04)}}
+.logo-base{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-user-drag:none}
+.logo-fx{position:absolute;inset:0;overflow:hidden;mix-blend-mode:screen;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.logo-fx-gold{-webkit-mask-image:url(assets/logo-gold.webp);mask-image:url(assets/logo-gold.webp)}
+.logo-fx-blue{-webkit-mask-image:url(assets/logo-blue.webp);mask-image:url(assets/logo-blue.webp)}
+.logo-fx i{position:absolute;top:-10%;bottom:-10%;left:0;width:36%;transform:translateX(-153%) skewX(-18deg);animation:logoSweep 9s linear infinite}
+.logo-fx-gold i{background:linear-gradient(90deg,rgba(255,205,70,0),rgba(255,205,70,.15) 18%,rgba(255,208,80,.95) 50%,rgba(255,205,70,.15) 82%,rgba(255,205,70,0))}
+.logo-fx-blue i{background:linear-gradient(90deg,rgba(120,225,255,0),rgba(120,225,255,.12) 15%,rgba(140,232,255,.62) 50%,rgba(120,225,255,.12) 85%,rgba(120,225,255,0))}
+@keyframes logoSweep{0%{transform:translateX(-153%) skewX(-18deg)}40%,100%{transform:translateX(331%) skewX(-18deg)}}
+.logo-nodes{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.logo-nodes .ring{fill:none;stroke:#ffc83c;stroke-width:1.6;vector-effect:non-scaling-stroke;opacity:0;transform-box:fill-box;transform-origin:center;animation:ringPulse 9s linear infinite;animation-delay:var(--d)}
+.logo-nodes .flash{fill:url(#node-glow);opacity:0;animation:nodeFlash 9s linear infinite;animation-delay:var(--d)}
+.logo-nodes .glint{fill:url(#glint-core);opacity:0;transform-box:fill-box;transform-origin:center;animation:logoGlint var(--t,3.6s) ease-in-out infinite;animation-delay:var(--d)}
+@keyframes ringPulse{0%{opacity:0;transform:scale(1)}3%{opacity:.85}22%,100%{opacity:0;transform:scale(3.6)}}
+@keyframes nodeFlash{0%{opacity:0}5%{opacity:1}18%,100%{opacity:0}}
+@keyframes logoGlint{0%,100%{opacity:0;transform:scale(.2)}50%{opacity:1;transform:scale(1)}}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-logo{justify-self:center;width:min(86vw,440px);margin:48px 0 0}}
+main{overflow-x:clip}
+.ambient{opacity:.25}
