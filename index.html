@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5b68cdac" />
+  <link rel="stylesheet" href="styles.css?v=bf931c0d" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -143,22 +143,38 @@
           <h2>Let's build the<br><span>next surgical workflow.</span></h2>
           <p>For VSP enquiries, clinical collaborations or product discussions.</p>
           <a class="contact-mail" href="mailto:admin@max-morph.com">admin@max-morph.com <span>↗</span></a>
+          <ul class="contact-points">
+            <li><b>VSP cases</b> Planning, surgical guides and patient-specific solutions</li>
+            <li><b>Collaboration</b> Clinical studies, validation and research</li>
+            <li><b>Product</b> Platform walkthroughs and early access</li>
+          </ul>
         </div>
-        <form class="contact-form" id="contact-form" action="mailto:admin@max-morph.com" method="post" enctype="text/plain">
-          <label>Name<input type="text" name="name" required autocomplete="name"></label>
-          <label>Email<input type="email" name="email" required autocomplete="email"></label>
-          <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
-          <label>Enquiry type
-            <select name="type">
-              <option>VSP case enquiry</option>
-              <option>Clinical collaboration</option>
-              <option>Product discussion</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>Message<textarea name="message" rows="4" required></textarea></label>
-          <button class="button button-primary" type="submit">Send message <span>→</span></button>
-          <small>This opens your email app with the message ready to send. Please do not include patient-identifiable information.</small>
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/admin@max-morph.com" method="POST" novalidate>
+          <div class="field-row">
+            <label>Name<input type="text" name="name" required autocomplete="name" maxlength="120"></label>
+            <label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" inputmode="email"></label>
+          </div>
+          <div class="field-row">
+            <label><span>Organisation <em>(optional)</em></span><input type="text" name="organisation" autocomplete="organization" maxlength="160"></label>
+            <label>Enquiry type
+              <select name="type">
+                <option>VSP case enquiry</option>
+                <option>Clinical collaboration</option>
+                <option>Product discussion</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label>Message<textarea name="message" rows="5" required maxlength="4000"></textarea></label>
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_subject" value="New MaxMorph website enquiry">
+          <div class="form-actions">
+            <button class="button button-primary" type="submit"><span class="btn-label">Send message</span> <span class="btn-arrow">→</span></button>
+            <small>Please do not include patient-identifiable information.</small>
+          </div>
+          <div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>
         </form>
       </div>
     </section>
@@ -173,7 +189,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=7f81871a"></script>
+  <script src="script.js?v=3ebbc4b0"></script>
   <script src="logo.js?v=01f44158"></script>
 </body>
 </html>

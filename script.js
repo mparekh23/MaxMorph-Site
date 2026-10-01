@@ -215,13 +215,55 @@ if ('IntersectionObserver' in window) {
   if (still) frame(0); else requestAnimationFrame(loop);
 })();
 
-// Contact form: compose a readable mailto message (static site, no backend).
-const form = document.getElementById('contact-form');
-if (form) {
-  form.addEventListener('submit', (e) => {
+// Contact form: sends through FormSubmit (https://formsubmit.co) so visitors need no email app.
+// If sending fails for any reason, the visitor is offered a ready-made email instead, so no enquiry is lost.
+(function () {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  if (!form || !status) return;
+  const btn = form.querySelector('button[type="submit"]');
+  const label = btn.querySelector('.btn-label');
+  const TO = 'admin@max-morph.com';
+
+  function say(kind, html) { status.hidden = false; status.className = 'form-status is-' + kind; status.innerHTML = html; }
+  function mailtoHref(d) {
+    const body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nOrganisation: ' + (d.get('organisation') || '-') + '\n\n' + d.get('message');
+    return 'mailto:' + TO + '?subject=' + encodeURIComponent('MaxMorph — ' + d.get('type')) + '&body=' + encodeURIComponent(body);
+  }
+  function valid() {
+    let first = null;
+    form.querySelectorAll('input[required], textarea[required]').forEach((f) => {
+      const bad = !f.value.trim() || (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim()));
+      f.closest('label').classList.toggle('has-error', bad);
+      f.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      if (bad && !first) first = f;
+    });
+    if (first) { say('error', 'Please fill in your name, a valid email address and a message.'); first.focus(); }
+    return !first;
+  }
+  form.addEventListener('input', (e) => { const l = e.target.closest('label'); if (l) l.classList.remove('has-error'); });
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (btn.disabled) return;
     const d = new FormData(form);
-    const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nOrganisation: ${d.get('organisation') || '-'}\n\n${d.get('message')}`;
-    window.location.href = `mailto:admin@max-morph.com?subject=${encodeURIComponent('MaxMorph — ' + d.get('type'))}&body=${encodeURIComponent(body)}`;
+    if (d.get('_honey')) { say('ok', 'Thank you — your message has been sent.'); return; }       // spam bots fill the hidden field; pretend success
+    if (!valid()) return;
+    btn.disabled = true; form.classList.add('is-sending'); label.textContent = 'Sending…'; status.hidden = true;
+    try {
+      const payload = {}; d.forEach((v, k) => { payload[k] = v; });
+      payload._replyto = d.get('email');
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
+      const res = await fetch('https://formsubmit.co/ajax/' + TO, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload), signal: ctl.signal });
+      clearTimeout(t);
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || String(out.success) === 'false') throw new Error('send failed');
+      form.reset(); form.classList.add('is-done');
+      say('ok', '<strong>Thank you.</strong> Your message has been sent and we will get back to you at the email address you provided.');
+    } catch (err) {
+      say('error', 'Sorry, we could not send that just now. <a href="' + mailtoHref(d) + '">Send it by email instead</a> or write to <a href="mailto:' + TO + '">' + TO + '</a>.');
+    } finally {
+      btn.disabled = false; form.classList.remove('is-sending'); label.textContent = 'Send message';
+    }
   });
-}
+})();
