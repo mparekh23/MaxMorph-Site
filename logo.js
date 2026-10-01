@@ -12,6 +12,10 @@
   var host = document.querySelector('.hero-logo');
   var cv = host && host.querySelector('.logo-net');
   if (!cv || !cv.getContext) return;
+  // The logo is hidden in the HTML until we know the stylesheet that lays it out is the matching version.
+  // (An older cached stylesheet would leave it unstyled; in that case it simply stays hidden.)
+  if (getComputedStyle(cv).position !== 'absolute') return;
+  host.hidden = false;
   var ctx = cv.getContext('2d');
   var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -71,7 +75,7 @@
   var scale = 1;
   function resize() {
     var dpr = Math.min(window.devicePixelRatio || 1, 3), w = host.clientWidth;
-    if (!w) return;
+    if (!w || w > 2400) return;                     // never size the canvas from a runaway layout
     cv.width = Math.round(w * dpr); cv.height = Math.round(w * H0 / W0 * dpr);
     scale = cv.width / W0;
     draw(curT);                                   // resizing clears the canvas, so repaint straight away
