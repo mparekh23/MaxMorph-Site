@@ -105,3 +105,22 @@ html{scroll-padding-top:90px}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.hero-logo{display:none}}      /* the logo is a desktop-only element */
 main{overflow-x:clip}
 .ambient{opacity:.25}
+
+/* ---- contact: finished form ---- */
+.contact-form .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form label em{font-style:normal;text-transform:none;letter-spacing:0;color:#9aa5b1}
+.contact-form textarea{resize:vertical;min-height:120px;line-height:1.55}
+.contact-form label.has-error input,.contact-form label.has-error textarea{border-color:var(--red);background:#fff8f7}
+.contact-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.form-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.form-actions small{flex:1 1 220px}
+.contact-form .button[disabled]{opacity:.65;cursor:progress;transform:none}
+.form-status{padding:14px 16px;border:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--ink)}
+.form-status.is-ok{border-color:rgba(39,164,91,.45);background:rgba(39,164,91,.07)}
+.form-status.is-error{border-color:rgba(230,59,46,.45);background:rgba(230,59,46,.06)}
+.form-status a{color:var(--blue);border-bottom:1px solid var(--line-blue)}
+.contact-points{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:14px}
+.contact-points li{font-size:13px;line-height:1.55;color:var(--muted);padding-left:16px;position:relative}
+.contact-points li:before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.contact-points b{display:block;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:560px){.contact-form .field-row{grid-template-columns:1fr}}
