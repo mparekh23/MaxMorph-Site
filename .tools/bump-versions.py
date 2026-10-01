@@ -5,11 +5,11 @@ Why: browsers cache these files for several minutes. Without a stamp, a visitor 
 index.html next to an OLD styles.css / script.js, which breaks the page. With a stamp, a changed file always
 has a new URL, so the page and its files always match.
 
-Run after changing styles.css, script.js, logo.js or assets/logo-base.webp:   python3 .tools/bump-versions.py
+Run after changing styles.css, script.js, logo.js or any stamped image:   python3 .tools/bump-versions.py
 """
 import hashlib, re, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
-files = ['styles.css', 'script.js', 'logo.js', 'assets/logo-base.webp']
+files = ['styles.css', 'script.js', 'logo.js', 'assets/logo-base.webp', 'assets/platform-skull.webp', 'assets/platform-surgery.webp', 'assets/platform-splint.webp']
 html = (root / 'index.html').read_text()
 for f in files:
     v = hashlib.sha1((root / f).read_bytes()).hexdigest()[:8]

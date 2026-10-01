@@ -124,3 +124,12 @@ main{overflow-x:clip}
 .contact-points li:before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .contact-points b{display:block;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 @media(max-width:560px){.contact-form .field-row{grid-template-columns:1fr}}
+
+/* ---- Platform boxes: artwork ---- */
+.feature-card{display:flex;flex-direction:column;min-height:520px}
+.feature-card .card-art{display:block;width:100%;height:290px;margin:14px 0 22px;object-fit:contain;object-position:center;pointer-events:none;user-select:none;-webkit-user-select:none}
+.feature-card .card-code{position:static;margin-top:auto;padding-top:18px}
+.feature-card p{margin-bottom:0}
+@media(max-width:900px){.feature-card{min-height:0}.feature-card .card-art{height:230px}.feature-large{min-height:0}}
+@media(min-width:901px) and (max-width:1120px){.feature-card h3{min-height:2em}}      /* keep the three paragraphs level when a title wraps */
+@media(min-width:901px){.feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}      /* three equal boxes */
