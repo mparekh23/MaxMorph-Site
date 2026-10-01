@@ -133,3 +133,12 @@ main{overflow-x:clip}
 @media(max-width:900px){.feature-card{min-height:0}.feature-card .card-art{height:230px}.feature-large{min-height:0}}
 @media(min-width:901px) and (max-width:1120px){.feature-card h3{min-height:2em}}      /* keep the three paragraphs level when a title wraps */
 @media(min-width:901px){.feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}      /* three equal boxes */
+/* ---- hero: fit and centre in the visible window (desktop) ---- */
+@media(min-width:901px){
+  .hero{--pad:clamp(24px,5vh,64px);min-height:calc(100vh - 78px);min-height:calc(100svh - 78px);padding-block:var(--pad);align-content:center}
+  .hero h1{font-size:clamp(60px,min(11vw,18vh),170px);margin-bottom:clamp(12px,2.6vh,28px)}
+  .hero-lede{margin-bottom:0}
+  .hero-actions{margin-top:clamp(16px,3.6vh,34px)}
+  .hero-copy .eyebrow{margin-bottom:clamp(14px,3vh,24px)}
+  .hero-logo{width:min(calc(100% + var(--bleed)),620px,calc((100vh - 78px - 2 * var(--pad) - 8px) * .955),calc((100svh - 78px - 2 * var(--pad) - 8px) * .955))}
+}
