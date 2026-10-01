@@ -10,6 +10,7 @@
   <meta property="og:description" content="A digital planning platform for maxillofacial surgery." />
   <meta property="og:image" content="https://max-morph.com/assets/maxmorph-splash.png" />
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preload" as="image" href="assets/logo-base.webp" type="image/webp" media="(min-width: 901px)" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -49,6 +50,11 @@
           <a class="button button-primary" href="#platform">Explore MaxMorph <span>→</span></a>
           <a class="button button-ghost" href="#contact">Request a VSP</a>
         </div>
+      </div>
+      <div class="hero-logo" role="img" aria-label="MaxMorph logo mark: a skull in clinical blue facets overlaid with a gold digital network">
+        <div class="logo-halo" aria-hidden="true"></div>
+        <img class="logo-base" src="assets/logo-base.webp" width="506" height="530" alt="" decoding="async" loading="lazy" draggable="false">
+        <canvas class="logo-net" aria-hidden="true"></canvas>
       </div>
     </section>
 
@@ -167,5 +173,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="logo.js"></script>
 </body>
 </html>
