@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=c4244412" />
+  <link rel="stylesheet" href="styles.css?v=1ab24497" />
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -28,15 +28,15 @@
   <div class="ambient ambient-d" aria-hidden="true"></div>
 
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="MaxMorph home">
-      <span class="brand-dot"></span>
-      <span class="brand-max">MAX</span><span class="brand-morph">MORPH</span>
+    <a class="brand" href="#top" aria-label="MaxMorph, from scan to surgery, digitally perfected. Home">
+      <span class="brand-name"><span class="brand-max">MAX</span><span class="brand-morph">MORPH</span></span>
+      <small class="brand-tag">From scan to surgery, digitally perfected.</small>
     </a>
     <nav class="nav" aria-label="Primary navigation">
       <a href="#platform">Platform</a>
       <a href="#workflow">Workflow</a>
       <a href="#applications">Applications</a>
-      <a href="#results">Results</a>
+      <a href="#about">About MaxMorph</a>
     </nav>
     <a class="nav-cta" href="#contact">Contact us <span>↗</span></a>
   </header>
@@ -98,11 +98,11 @@
       <div class="pipeline-box reveal">
         <div class="pipeline">
           <div class="pipeline-line"></div>
-          <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral scan</p></div>
-          <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface data</p></div>
+          <div class="pipeline-step"><b>01</b><div class="step-dot"></div><h3>Acquire</h3><p>CBCT / CT<br>Intraoral Scan</p></div>
+          <div class="pipeline-step"><b>02</b><div class="step-dot"></div><h3>Segment</h3><p>Anatomy<br>Surface Data</p></div>
           <div class="pipeline-step"><b>03</b><div class="step-dot"></div><h3>Plan</h3><p>Osteotomy<br>Movement</p></div>
           <div class="pipeline-step"><b>04</b><div class="step-dot"></div><h3>Transfer</h3><p>Splints<br>Guides / PSI</p></div>
-          <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital plan<br>→ surgical field</p></div>
+          <div class="pipeline-step"><b>05</b><div class="step-dot"></div><h3>Operate</h3><p>Digital Plan<br>→ Surgical Field</p></div>
         </div>
       </div>
     </section>
@@ -122,18 +122,56 @@
     </section>
 
 
-    <section class="section results" id="results">
+    <section class="section why" id="about">
       <div class="section-heading reveal">
-        <div class="section-index">04 / RESULTS</div><h2>Measured against<br><span>the operating room.</span></h2>
-        <p>A plan is only as good as its transfer to surgery. MaxMorph is built so every case can be checked against what actually happened.</p>
+        <div class="section-index">04 / ABOUT MAXMORPH</div>
+        <h2>Built for the surgeons<br><span>by a surgeon.</span></h2>
+        <p>MaxMorph is developed by Dr. Meet Parekh, a maxillofacial surgeon dedicated to bridging the gap between advanced computational engineering and clinical surgery.</p>
       </div>
-      <div class="results-grid">
-        <article class="result-card reveal"><span>ACCURACY</span><h3>Planned vs achieved</h3><p>Compare the virtual plan with post-operative imaging to quantify translation and rotation of each segment.</p></article>
-        <article class="result-card reveal reveal-delay"><span>FIT</span><h3>Guide &amp; splint fit</h3><p>Verify that surgical guides and splints seat as designed, and record any adjustment needed at the table.</p></article>
-        <article class="result-card reveal reveal-delay-2"><span>EFFICIENCY</span><h3>Planning turnaround</h3><p>Track time from scan received to plan approved and guides delivered, case by case.</p></article>
-        <article class="result-card reveal"><span>OCCLUSION</span><h3>Occlusal outcome</h3><p>Assess post-operative occlusal relationships against the planned target.</p></article>
+      <div class="why-grid">
+
+        <article class="why-card founder-card reveal">
+          <div class="founder-head">
+            <img class="founder-photo" src="assets/founder.webp?v=6de6e511" width="360" height="360" loading="lazy" decoding="async" alt="Dr. Meet Parekh, maxillofacial surgeon and developer of MaxMorph">
+            <div>
+              <div class="why-label">FOUNDER &amp; DEVELOPER</div>
+              <h3>Dr. Meet Parekh</h3>
+            </div>
+          </div>
+          <p class="founder-role">Maxillofacial Surgeon and Developer of MaxMorph.</p>
+          <p class="founder-note">Clinical judgement and computational engineering, in one person and one platform.</p>
+          <a class="why-link" href="https://www.linkedin.com/in/meet-23-parekh" target="_blank" rel="noopener noreferrer">View LinkedIn profile <span>↗</span></a>
+        </article>
+
+        <article class="why-card diff-card reveal reveal-delay">
+          <div class="why-label">WHAT SETS MAXMORPH APART</div>
+          <ul class="diff-list">
+            <li>
+              <b>Medical</b>
+              <p>Every plan starts from the surgical objective, such as occlusion, facial symmetry and function. A surgeon reviews each step, so nothing leaves the planning stage unapproved.</p>
+            </li>
+            <li>
+              <b>Engineering</b>
+              <p>Purpose-built for craniomaxillofacial anatomy, not general-purpose 3D software adapted for surgery. Segmentation, osteotomy simulation, occlusion and guide design are modelled around the jaw and face from start to finish.</p>
+            </li>
+            <li>
+              <b>Cost-effective</b>
+              <p>A direct, surgeon-led service with no agency layers and fast turnaround. You pay for the planning, not the overhead, and quality planning stays accessible to clinics of any size.</p>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Hidden until real entries are added in why.js (TESTIMONIALS). With no entries the card stays hidden. -->
+        <article class="why-card why-slider reveal" id="why-testimonials" data-kind="testimonials" hidden>
+          <div class="why-label">WHAT CLINICIANS SAY</div>
+        </article>
+
+        <!-- Hidden until real entries are added in why.js (CLIENTS). With no entries the card stays hidden. -->
+        <article class="why-card why-slider reveal reveal-delay" id="why-clients" data-kind="clients" hidden>
+          <div class="why-label">HOSPITALS &amp; CLINICS WE WORK WITH</div>
+        </article>
+
       </div>
-      <p class="results-note reveal">Case results and validation data will be published here as they are finalised. For study collaborations, <a href="#contact">get in touch</a>.</p>
     </section>
 
     <section class="section contact" id="contact">
@@ -155,16 +193,17 @@
             <label>Email<input type="email" name="email" required autocomplete="email" maxlength="160" inputmode="email"></label>
           </div>
           <div class="field-row">
+            <label><span>Phone <em>(optional)</em></span><input type="tel" name="phone" autocomplete="tel" maxlength="40" inputmode="tel"></label>
             <label><span>Organisation <em>(optional)</em></span><input type="text" name="organisation" autocomplete="organization" maxlength="160"></label>
-            <label>Enquiry type
-              <select name="type">
-                <option>VSP case enquiry</option>
-                <option>Clinical collaboration</option>
-                <option>Product discussion</option>
-                <option>Other</option>
-              </select>
-            </label>
           </div>
+          <label>Enquiry type
+            <select name="type">
+              <option>VSP case enquiry</option>
+              <option>Clinical collaboration</option>
+              <option>Product discussion</option>
+              <option>Other</option>
+            </select>
+          </label>
           <label>Message<textarea name="message" rows="5" required maxlength="4000"></textarea></label>
           <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="_captcha" value="false">
@@ -172,7 +211,6 @@
           <input type="hidden" name="_subject" value="New MaxMorph website enquiry">
           <div class="form-actions">
             <button class="button button-primary" type="submit"><span class="btn-label">Send message</span> <span class="btn-arrow">→</span></button>
-            <small>Please do not include patient-identifiable information.</small>
           </div>
           <div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>
         </form>
@@ -189,7 +227,8 @@
     </div>
   </footer>
 
-  <script src="script.js?v=3ebbc4b0"></script>
+  <script src="script.js?v=4341226c"></script>
+  <script src="why.js?v=e617469f"></script>
   <script src="logo.js?v=01f44158"></script>
 </body>
 </html>
