@@ -227,7 +227,7 @@ if ('IntersectionObserver' in window) {
 
   function say(kind, html) { status.hidden = false; status.className = 'form-status is-' + kind; status.innerHTML = html; }
   function mailtoHref(d) {
-    const body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nOrganisation: ' + (d.get('organisation') || '-') + '\n\n' + d.get('message');
+    const body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nPhone: ' + (d.get('phone') || '-') + '\nOrganisation: ' + (d.get('organisation') || '-') + '\n\n' + d.get('message');
     return 'mailto:' + TO + '?subject=' + encodeURIComponent('MaxMorph — ' + d.get('type')) + '&body=' + encodeURIComponent(body);
   }
   function valid() {

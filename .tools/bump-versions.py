@@ -9,7 +9,7 @@ Run after changing styles.css, script.js, logo.js or any stamped image:   python
 """
 import hashlib, re, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
-files = ['styles.css', 'script.js', 'logo.js', 'assets/logo-base.webp', 'assets/platform-skull.webp', 'assets/platform-surgery.webp', 'assets/platform-splint.webp']
+files = ['styles.css', 'script.js', 'why.js', 'logo.js', 'assets/logo-base.webp', 'assets/platform-skull.webp', 'assets/platform-surgery.webp', 'assets/platform-splint.webp', 'assets/founder.webp']
 html = (root / 'index.html').read_text()
 for f in files:
     v = hashlib.sha1((root / f).read_bytes()).hexdigest()[:8]
