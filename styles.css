@@ -214,3 +214,13 @@ main{overflow-x:clip}
 @media(min-width:901px) and (max-width:1060px){.brand-tag{font-size:7.5px;letter-spacing:.07em}}
 @media(max-width:380px){.brand-tag{white-space:normal;max-width:132px;line-height:1.35;font-size:6.5px}.nav-cta{padding:8px 9px;font-size:10px}}
 @media(min-width:901px) and (max-width:1000px){.nav{gap:14px;letter-spacing:.05em;font-size:11px}.nav-cta{padding:9px 12px}}
+.diff-card .diff-list{flex:1;align-content:center;gap:30px}
+.diff-card .diff-list li{padding-top:26px}
+.diff-card .diff-list li:first-child{padding-top:0}
+.founder-head+.founder-note{margin-top:30px}
+/* founder name: always on one line, sized to the space left beside the photo */
+.founder-head{--ph:124px;--gap:26px;container-type:inline-size}
+.founder-head>div:last-child{min-width:0}
+.founder-card h3{white-space:nowrap;font-size:min(42px,calc((100cqi - var(--ph) - var(--gap) - 8px) / 6.3))}
+@media(max-width:520px){.founder-head{--ph:96px;--gap:18px}}
+@media(min-width:901px) and (max-width:1180px){.founder-head{--ph:96px;--gap:18px}.founder-photo{width:96px;height:96px}.founder-head{gap:18px}}
