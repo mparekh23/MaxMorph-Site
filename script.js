@@ -267,3 +267,24 @@ if ('IntersectionObserver' in window) {
     }
   });
 })();
+
+// Founder name: keep it on one line inside its card, whichever font is actually showing.
+// (The CSS gives a good first size for the site font; this corrects it if a wider fallback font is used.)
+(function () {
+  const h = document.querySelector('.founder-card h3');
+  if (!h) return;
+  const head = h.closest('.founder-head'), photo = head.querySelector('.founder-photo');
+  // space beside the photo = card row width, minus the photo and the gap between them
+  const room = () => head.getBoundingClientRect().width - (photo ? photo.getBoundingClientRect().width : 0) - (parseFloat(getComputedStyle(head).columnGap) || 0) - 4;
+  function fit() {
+    h.style.fontSize = '';
+    let fs = parseFloat(getComputedStyle(h).fontSize);
+    const r = document.createRange(); r.selectNodeContents(h);
+    for (let i = 0; i < 40 && fs > 12 && r.getBoundingClientRect().width > room(); i++) { fs -= 1; h.style.fontSize = fs + 'px'; }
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener('load', fit);
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(head);
+  else window.addEventListener('resize', fit);
+})();
