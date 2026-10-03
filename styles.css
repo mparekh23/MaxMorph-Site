@@ -224,3 +224,17 @@ main{overflow-x:clip}
 .founder-card h3{white-space:nowrap;font-size:min(42px,calc((100cqi - var(--ph) - var(--gap) - 8px) / 6.3))}
 @media(max-width:520px){.founder-head{--ph:96px;--gap:18px}}
 @media(min-width:901px) and (max-width:1180px){.founder-head{--ph:96px;--gap:18px}.founder-photo{width:96px;height:96px}.founder-head{gap:18px}}
+
+/* ---- 03 / What you receive ---- */
+.deliver-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.deliver-card{background:#fff;border:1px solid var(--line);padding:clamp(26px,3vw,40px);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s}
+.deliver-card:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;border:1px solid rgba(7,85,143,.08);right:-95px;top:-90px;pointer-events:none}
+.deliver-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.deliver-head h3{font:600 clamp(32px,3.2vw,44px)/.95 var(--display);text-transform:uppercase;margin:10px 0 0;color:var(--ink)}
+.deliver-list{list-style:none;margin:26px 0 0;padding:0;flex:1;display:grid;grid-auto-rows:1fr;border-top:1px solid var(--line)}
+.deliver-list li{display:flex;align-items:center;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);min-height:52px}
+.deliver-list li:last-child{border-bottom:0}
+.dl-n{flex:none;font:700 11px var(--mono);letter-spacing:.1em;color:var(--gold);width:22px}
+.dl-t{font:600 clamp(20px,1.9vw,24px)/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;color:var(--blue)}
+@media(max-width:900px){.deliver-grid{grid-template-columns:1fr}.deliver-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.deliver-card{transition:none}}
