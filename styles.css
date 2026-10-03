@@ -238,3 +238,7 @@ main{overflow-x:clip}
 .dl-t{font:600 clamp(20px,1.9vw,24px)/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;color:var(--blue)}
 @media(max-width:900px){.deliver-grid{grid-template-columns:1fr}.deliver-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.deliver-card{transition:none}}
+/* all white boxes share the same see-through white, so the animated background shows through them */
+:root{--card-bg:rgba(255,255,255,.7)}
+.feature-card,.application-card,.why-card,.deliver-card,.contact-panel{background:var(--card-bg)}
+.feature-large{background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(238,247,251,.72))}
