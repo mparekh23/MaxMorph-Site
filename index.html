@@ -3,19 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MaxMorph — Digital Maxillofacial Surgery</title>
+  <title>Virtual Surgical Planning for Maxillofacial Surgery | MaxMorph</title>
   <meta name="description" content="MaxMorph — digital workflows for virtual surgical planning, surgical guides and patient-specific solutions in maxillofacial surgery." />
+  <link rel="canonical" href="https://max-morph.com/" />
   <meta name="theme-color" content="#f8fafc" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MaxMorph" />
+  <meta property="og:url" content="https://max-morph.com/" />
   <meta property="og:title" content="MaxMorph — From Scan to Surgery, Digitally Perfected" />
-  <meta property="og:description" content="A digital planning platform for maxillofacial surgery." />
-  <meta property="og:image" content="https://max-morph.com/assets/maxmorph-splash.png" />
+  <meta property="og:description" content="Virtual surgical planning, surgical guides and patient-specific solutions for maxillofacial surgery, planned by a maxillofacial surgeon." />
+  <meta property="og:image" content="https://max-morph.com/assets/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MaxMorph: From scan to surgery. A blue skull with a golden digital network, beside the words Virtual surgical planning for maxillofacial surgery." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MaxMorph — From Scan to Surgery, Digitally Perfected" />
+  <meta name="twitter:description" content="Virtual surgical planning, surgical guides and patient-specific solutions for maxillofacial surgery." />
+  <meta name="twitter:image" content="https://max-morph.com/assets/og-image.jpg" />
+  <meta name="twitter:image:alt" content="MaxMorph: From scan to surgery. A blue skull with a golden digital network." />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://max-morph.com/#organization",
+      "name": "MaxMorph",
+      "legalName": "MaxMorph LLP",
+      "url": "https://max-morph.com/",
+      "logo": "https://max-morph.com/logo-mark.png",
+      "description": "Digital workflows for virtual surgical planning, surgical guides and patient-specific solutions in maxillofacial surgery.",
+      "email": "admin@max-morph.com",
+      "founder": {
+        "@id": "https://max-morph.com/#founder"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/meet-23-parekh"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://max-morph.com/#founder",
+      "name": "Dr. Meet Parekh",
+      "jobTitle": "Maxillofacial Surgeon; Founder and Developer, MaxMorph",
+      "image": "https://max-morph.com/assets/founder.webp",
+      "worksFor": {
+        "@id": "https://max-morph.com/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/meet-23-parekh"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://max-morph.com/#website",
+      "name": "MaxMorph",
+      "url": "https://max-morph.com/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://max-morph.com/#organization"
+      }
+    }
+  ]
+}
+  </script>
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="preload" as="image" href="assets/logo-base.webp?v=afa51707" type="image/webp" media="(min-width: 901px)" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3882ee55" />
-  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-400-normal.woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=31a21c65" />
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}.nav-toggle{display:none!important}</style></noscript>
 </head>
 <body>
   <div id="top"></div>
@@ -32,13 +93,14 @@
       <span class="brand-name"><span class="brand-max">MAX</span><span class="brand-morph">MORPH</span></span>
       <small class="brand-tag">From scan to surgery, digitally perfected.</small>
     </a>
-    <nav class="nav" aria-label="Primary navigation">
+    <nav class="nav" id="primary-nav" aria-label="Primary navigation">
       <a href="#platform">Platform</a>
       <a href="#applications">Applications</a>
       <a href="#deliverables">What You Receive</a>
       <a href="#about">About MaxMorph</a>
     </nav>
     <a class="nav-cta" href="#contact">Contact us <span>↗</span></a>
+    <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
   </header>
 
   <main>
@@ -46,7 +108,7 @@
       <div class="hero-copy reveal">
         <div class="eyebrow"><span></span> DIGITAL MAXILLOFACIAL SURGERY</div>
         <h1>From scan<br>to <em>surgery.</em></h1>
-        <p class="hero-lede">A digital planning environment built around the anatomy, geometry and precision of maxillofacial surgery.</p>
+        <p class="hero-lede">Virtual surgical planning (VSP) built around the anatomy, geometry and precision of maxillofacial surgery.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#platform">Explore MaxMorph <span>→</span></a>
           <a class="button button-ghost" href="#contact">Request a VSP</a>
@@ -237,7 +299,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=bdf42d15"></script>
+  <script src="script.js?v=fbf7c6f2"></script>
   <script src="why.js?v=e617469f"></script>
   <script src="logo.js?v=01f44158"></script>
 </body>

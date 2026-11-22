@@ -1,3 +1,13 @@
+/* self-hosted fonts (SIL OFL 1.1; licences in assets/fonts/) */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/inter-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/barlow-condensed-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/barlow-condensed-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/barlow-condensed-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/space-mono-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/space-mono-latin-700-normal.woff2) format('woff2')}
 :root{
   --bg:#f8fafc;
   --paper:#ffffff;
@@ -242,3 +252,20 @@ main{overflow-x:clip}
 :root{--card-bg:rgba(255,255,255,.7)}
 .feature-card,.application-card,.why-card,.deliver-card,.contact-panel{background:var(--card-bg)}
 .feature-large{background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(238,247,251,.72))}
+
+/* mobile menu: the toggle button is added by script.js, so without JS nothing dead is shown */
+.nav-toggle{display:none}
+@media(max-width:900px){
+  .nav-cta{margin-left:auto}
+  .nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:38px;padding:0 10px;margin-left:10px;border:1px solid var(--blue);background:transparent;cursor:pointer}
+  .nav-toggle span{display:block;height:2px;background:var(--blue);transition:transform .25s,opacity .25s}
+  .nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-open .nav-toggle span:nth-child(2){opacity:0}
+  .nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .site-header.nav-open .nav{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;padding:4px clamp(22px,5vw,72px) 12px;font-size:13px;background:rgba(248,250,252,.97);border-bottom:1px solid var(--line)}
+  .site-header.nav-open .nav a{padding:15px 0;border-top:1px solid var(--line)}
+  .site-header.nav-open .nav a:first-child{border-top:0}
+}
+@media(max-width:900px){.nav-cta{white-space:nowrap}}
+@media(max-width:520px){.nav-cta span{display:none}.nav-toggle{width:38px;margin-left:8px;padding:0 9px}}
+@media(prefers-reduced-motion:reduce){.nav-toggle span{transition:none}}
