@@ -10,8 +10,8 @@ Sections: Home, Platform, Applications, What You Receive, About MaxMorph, Contac
 - `logo.js` — animates the floating left side of the golden network (redrawn as vectors) and runs light pulses along the golden lines over the static artwork
 - `assets/maxmorph-logo-transparent.png` — the full-size transparent logo (not used by the page; for reuse)
 - `assets/` — other brand assets (mark, splash, motion video)
-- `backup/coming-soon-v0/` — the original "launching soon" page
-- `backup/round-3/` — snapshot of the site after the third round of edits (open `backup/round-3/index.html`)
+- `robots.txt`, `sitemap.xml` — crawler directives (single-page site: update `sitemap.xml` when pages are added)
+- Older versions of the site (the "launching soon" page and the round-3 snapshot) are no longer published; they live in git history and on the `backup/pre-seo-2026-11-22` branch, which also holds the full pre-SEO site
 
 ## Hosting note: keep this site informational
 

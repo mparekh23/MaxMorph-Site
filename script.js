@@ -288,3 +288,27 @@ if ('IntersectionObserver' in window) {
   if ('ResizeObserver' in window) new ResizeObserver(fit).observe(head);
   else window.addEventListener('resize', fit);
 })();
+
+// Mobile menu: under 900px the nav is hidden by CSS, so add a toggle button (only when JS is running).
+(function () {
+  const header = document.querySelector('.site-header');
+  const nav = document.getElementById('primary-nav');
+  const cta = header && header.querySelector('.nav-cta');
+  if (!header || !nav || !cta) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'nav-toggle';
+  btn.setAttribute('aria-label', 'Menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'primary-nav');
+  btn.innerHTML = '<span></span><span></span><span></span>';
+  cta.after(btn);
+  function setOpen(open) {
+    header.classList.toggle('nav-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', () => setOpen(!header.classList.contains('nav-open')));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+})();
