@@ -289,20 +289,12 @@ if ('IntersectionObserver' in window) {
   else window.addEventListener('resize', fit);
 })();
 
-// Mobile menu: under 900px the nav is hidden by CSS, so add a toggle button (only when JS is running).
+// Mobile menu: under 900px the nav is hidden by CSS; the toggle button is in the HTML (hidden via <noscript> without JS).
 (function () {
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('primary-nav');
-  const cta = header && header.querySelector('.nav-cta');
-  if (!header || !nav || !cta) return;
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'nav-toggle';
-  btn.setAttribute('aria-label', 'Menu');
-  btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-controls', 'primary-nav');
-  btn.innerHTML = '<span></span><span></span><span></span>';
-  cta.after(btn);
+  const btn = header && header.querySelector('.nav-toggle');
+  if (!header || !nav || !btn) return;
   function setOpen(open) {
     header.classList.toggle('nav-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
