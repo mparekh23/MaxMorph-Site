@@ -304,3 +304,81 @@ if ('IntersectionObserver' in window) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 })();
+
+/* capabilities slideshow: plays by itself, with arrows, dots, a pause button, swipe and arrow keys.
+   It pauses while the pointer or keyboard focus is on it, while off-screen or in a hidden tab, and stays
+   still for people who ask their device to reduce motion. Without JavaScript the slides simply stack. */
+(function(){
+  var show=document.getElementById('cap-show');
+  if(!show)return;
+  var list=show.querySelector('.cap-slides'),slides=[].slice.call(show.querySelectorAll('.cap-slide')),
+      controls=show.querySelector('.cap-controls'),dots=show.querySelector('.cap-dots'),
+      pauseBtn=show.querySelector('.cap-pause');
+  if(slides.length<2||!controls)return;
+  // a different order on every visit (the page itself stays in a fixed order for search engines)
+  for(var k=slides.length-1;k>0;k--){var r=Math.floor(Math.random()*(k+1)),t=slides[k];slides[k]=slides[r];slides[r]=t}
+  slides.forEach(function(s,i){
+    list.appendChild(s);
+    s.setAttribute('aria-label',(i+1)+' of '+slides.length);
+    var c=s.querySelector('.cap-count');if(c)c.textContent=('0'+(i+1)).slice(-2)+' / '+('0'+slides.length).slice(-2);
+  });
+  var DELAY=6000,cur=0,btns=[],timer=null,userPaused=false,hover=false,focused=false,visible=false,
+      still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.className='cap-dot';
+    b.setAttribute('aria-label','Slide '+(i+1)+' of '+slides.length);
+    b.addEventListener('click',function(){go(i)});
+    dots.appendChild(b);btns.push(b);
+  });
+  function running(){return !still&&!userPaused&&!hover&&!focused&&visible&&!document.hidden}
+  function schedule(){
+    clearTimeout(timer);timer=null;
+    if(running())timer=setTimeout(function(){go(cur+1)},DELAY);
+    list.setAttribute('aria-live',running()?'off':'polite');
+  }
+  function go(n){
+    cur=(n+slides.length)%slides.length;
+    slides.forEach(function(s,i){
+      var on=i===cur;
+      s.classList.toggle('is-active',on);
+      if(on)s.removeAttribute('aria-hidden');else s.setAttribute('aria-hidden','true');
+    });
+    [cur,(cur+1)%slides.length].forEach(function(k){var im=slides[k].querySelector('img');if(im)im.loading='eager'});
+    btns.forEach(function(b,i){if(i===cur)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
+    schedule();
+  }
+  show.querySelector('.cap-prev').addEventListener('click',function(){go(cur-1)});
+  show.querySelector('.cap-next').addEventListener('click',function(){go(cur+1)});
+  if(pauseBtn){
+    if(still)pauseBtn.hidden=true;
+    pauseBtn.addEventListener('click',function(){
+      userPaused=!userPaused;
+      pauseBtn.setAttribute('aria-pressed',userPaused?'true':'false');
+      pauseBtn.setAttribute('aria-label',userPaused?'Play slideshow':'Pause slideshow');
+      pauseBtn.firstElementChild.innerHTML=userPaused?'&#9654;':'&#10074;&#10074;';
+      schedule();
+    });
+  }
+  show.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){go(cur-1);e.preventDefault()}
+    else if(e.key==='ArrowRight'){go(cur+1);e.preventDefault()}
+  });
+  show.addEventListener('mouseenter',function(){hover=true;schedule()});
+  show.addEventListener('mouseleave',function(){hover=false;schedule()});
+  show.addEventListener('focusin',function(e){
+    var kb=true;try{kb=e.target.matches(':focus-visible')}catch(_){}
+    focused=kb;schedule();   // only keyboard focus holds it still, so a mouse click on a button does not stop the show
+  });
+  show.addEventListener('focusout',function(){focused=false;schedule()});
+  document.addEventListener('visibilitychange',schedule);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){visible=en[0].isIntersecting;schedule()},{threshold:.35}).observe(show);
+  }else{visible=true}
+  var x0=null;
+  show.addEventListener('touchstart',function(e){x0=e.changedTouches[0].clientX},{passive:true});
+  show.addEventListener('touchend',function(e){
+    if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
+    if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));
+  },{passive:true});
+  controls.hidden=false;show.classList.add('is-ready');go(0);
+})();
