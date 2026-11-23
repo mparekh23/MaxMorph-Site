@@ -303,3 +303,11 @@ main{overflow-x:clip}
   .cap-dots{gap:0;flex-wrap:nowrap}
   .cap-dot{width:22px}
 }
+
+/* header "Contact us": the full button on desktop only; on phones and tablets "Contact us" is in the menu */
+.nav-contact{display:none}
+@media(max-width:900px){
+  .nav-cta{display:none}
+  .nav-toggle{margin-left:auto}
+  .site-header.nav-open .nav .nav-contact{display:block}
+}
